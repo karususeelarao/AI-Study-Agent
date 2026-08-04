@@ -1,0 +1,81 @@
+/* ===========================
+   Background
+=========================== */
+
+.stApp {
+    background: #0F172A;
+}
+
+/* ===========================
+   Hero Section
+=========================== */
+
+.hero {
+    background: linear-gradient(135deg,#4F46E5,#7C3AED);
+    padding:40px;
+    border-radius:25px;
+    color:white;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:52px;
+    font-weight:700;
+}
+
+.hero p{
+    font-size:20px;
+    opacity:.9;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card{
+    background:#1E293B;
+    border-radius:20px;
+    padding:25px;
+    border:1px solid #334155;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#7C3AED;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.stButton>button{
+
+    width:100%;
+    border-radius:15px;
+
+    background:linear-gradient(
+        90deg,
+        #7C3AED,
+        #4F46E5
+    );
+
+    color:white;
+    font-size:17px;
+
+    font-weight:600;
+
+    height:55px;
+
+    border:none;
+}
+
+.stButton>button:hover{
+
+    background:linear-gradient(
+        90deg,
+        #8B5CF6,
+        #6366F1
+    );
+
+}

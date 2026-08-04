@@ -1,0 +1,25 @@
+# Environment
+.env
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Generated data (not source-controlled)
+data/*.log
+database/*.db
+uploads/*
+!uploads/.gitkeep
+notes/*
+!notes/.gitkeep
+vector_db/*
+!vector_db/.gitkeep
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
