@@ -43,3 +43,4 @@ black>=24.10.0                           # Code formatter (PEP-8 enforcement)
 flake8>=7.1.1                            # Linting
 langchain-google-genai
 streamlit-mic-recorder
+openai-whisper
