@@ -41,3 +41,4 @@ pytest-mock>=3.15.1                      # Mocking for LLM/API calls in tests
 # --- Dev / Quality (optional but recommended) ---
 black>=24.10.0                           # Code formatter (PEP-8 enforcement)
 flake8>=7.1.1                            # Linting
+langchain-google-genai
