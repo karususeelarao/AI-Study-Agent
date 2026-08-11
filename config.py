@@ -222,3 +222,4 @@ def load_settings() -> Settings:
 
 
 settings = load_settings()
+print("Loaded Gemini Model:", settings.gemini_model)

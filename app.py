@@ -9,14 +9,20 @@ agents/services; this file is intentionally "thin" — it only handles UI
 state and delegates actual work.
 ==============================================================================
 """
-
 from __future__ import annotations
+from ui.voice_ui import render_voice_ui
+from services.speech_service import SpeechService
+from services.tts_service import TTSService
+
+from services.speech_service import SpeechService
+from services.tts_service import TTSService
+from services.llm_service import LLMService
 
 import streamlit as st
 from ui.dashboard import render_dashboard
 from ui.sidebar import render_sidebar
 from ui.theme import load_theme
-
+from pathlib import Path
 from config import settings
 from database.sqlite_db import SQLiteDatabase
 from logger import get_logger
@@ -525,12 +531,13 @@ def main() -> None:
     st.session_state.session_id,
 )
 
-    tab_study, tab_pdf, tab_history, tab_mock = st.tabs([
+    tab_study, tab_pdf, tab_history, tab_mock, tab_voice = st.tabs([
         "📘 Study Generator",
         "📄 PDF Q&A",
         "🕓 History",
         "🎤 Mock Interview",
-    ])
+        "🎙️ Voice Assistant",
+])
 
     with tab_study:
         render_study_tab(
@@ -612,6 +619,43 @@ def main() -> None:
 
                 st.markdown("### Ideal Answer")
                 st.write(result["ideal_answer"])
+
+
+
+    with tab_voice:
+
+        speech = SpeechService()
+        tts = TTSService()
+        llm = LLMService()
+
+        audio = render_voice_ui()
+
+    if audio:
+
+        Path("audio/input").mkdir(parents=True, exist_ok=True)
+
+        audio_path = "audio/input/user_voice.wav"
+
+        with open(audio_path, "wb") as f:
+            f.write(audio["bytes"])
+
+        st.success("🎤 Voice recorded successfully!")
+
+        st.audio(audio_path)
+
+        text = speech.transcribe(audio_path)
+
+        st.subheader("📝 You said")
+
+        st.success(text)
+        st.subheader("🤖 AI Response")
+
+        response = llm.generate(
+            system_prompt="You are a helpful AI study assistant.",
+            user_prompt=text,
+        )
+
+        st.success(response)
 
 if __name__ == "__main__":
     main()
